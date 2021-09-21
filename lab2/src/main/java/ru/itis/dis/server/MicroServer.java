@@ -48,7 +48,8 @@ public class MicroServer implements Runnable {
     @Override
     public void run() {
         write("Enter a number from 1-10\n");
-        int guessNumber = new Random().nextInt(11);
+        int guessNumber = new Random().nextInt(10)+1;
+        System.out.println(guessNumber);
         int tries = 3;
         try {
             while (tries > 0) {
@@ -76,7 +77,6 @@ public class MicroServer implements Runnable {
             clientSocket.close();
             System.out.println(clientSocket + " closed!");
         } catch (IOException e) {
-            System.out.println("Line 75");
             e.printStackTrace();
         }
 
