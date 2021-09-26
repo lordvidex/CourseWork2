@@ -49,7 +49,9 @@ public class Client {
             var stopper = new Object() {
                 boolean running = true;
             };
+
             System.out.println("Enter your username:");
+
             username = reader.readLine().trim();
             write(username);
             // listen for replies from the server and print to the output console
@@ -79,16 +81,12 @@ public class Client {
                     recipient = reader.readLine().trim();
                 }
                 String message = reader.readLine().trim();
-                if (message.equals("/back")) {
-                    recipient = null;
-                } else if (message.equals("/status")) {
-                    System.out.println("Your username is " + username +
+                switch (message) {
+                    case "/back" -> recipient = null;
+                    case "/status" -> System.out.println("Your username is " + username +
                             "\nYou are currently writing messages to " + recipient);
-                } else if (message.equals("/quit")) {
-                    write(":q");
-                } else {
-                    write(new Message(username, recipient, message).encoded());
-
+                    case "/quit" -> write(":q");
+                    default -> write(new Message(username, recipient, message).encoded());
                 }
             }
 
