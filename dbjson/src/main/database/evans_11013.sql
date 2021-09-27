@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS clients,cars,drivers,rides;
 
 -- create the database
 CREATE DATABASE uberdb;
+\connect uberdb;
 
 -- create the tables
 
