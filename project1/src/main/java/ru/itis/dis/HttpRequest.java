@@ -3,6 +3,7 @@ package ru.itis.dis;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,9 +18,8 @@ import java.util.Map;
  * Desc:
  */
 public class HttpRequest {
-    private InputStream is;
 
-    private Map<String, String> headers;
+    private final Map<String, String> headers;
 
     private String method;
 
@@ -49,9 +49,21 @@ public class HttpRequest {
         return httpVersion;
     }
 
+    public Map<String,String> getCookies() {
+        HashMap<String,String> cookies = new HashMap<>();
+        String cookieString = getHeader("Cookie");
+        if(cookieString != null) {
+            Arrays.stream(cookieString.split(";"))
+                    .forEach(entry -> {
+                String[] kvPair = entry.trim().split("=");
+                cookies.put(kvPair[0],kvPair[1]);
+            });
+        }
+        return cookies;
+    }
+
 
     HttpRequest(InputStream is) throws IOException {
-        this.is = is;
         headers = new HashMap<>();
         parseValues(is);
     }
@@ -122,6 +134,7 @@ public class HttpRequest {
         method = arr[0];
         path = arr[1];
         httpVersion = arr[2];
+        System.out.println(path);
     }
 
     private void setHeader(String line) {

@@ -3,9 +3,11 @@ package ru.itis.dis.handlers;
 import ru.itis.dis.HttpHandler;
 import ru.itis.dis.HttpRequest;
 import ru.itis.dis.HttpResponse;
-import ru.itis.dis.utils.FileToStringReader;
+import ru.itis.dis.utils.Constants;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created by IntelliJ IDEA
@@ -20,9 +22,7 @@ import java.io.IOException;
 public class ErrorHandler implements HttpHandler {
     @Override
     public void process(HttpRequest req, HttpResponse res) throws IOException {
-        String errorHtml = new FileToStringReader("project1/src/main/webapp/WEB-INF/views/error.html")
-                .readToString();
-        res.setBody(errorHtml);
+        res.setBody(Files.readString(Paths.get(Constants.htmlResPath+"error.html")));
         res.send();
     }
 }

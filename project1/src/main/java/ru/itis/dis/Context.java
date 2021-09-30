@@ -1,5 +1,7 @@
 package ru.itis.dis;
 
+import ru.itis.dis.handlers.ServerFileHandler;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +42,11 @@ public class Context {
             _path = path.substring(0,path.length()-1);
         } else {
             _path = path+"/";
+        }
+
+        // resource handlers first
+        if(path.endsWith(".css") || path.endsWith(".js") || path.endsWith("html")) {
+            return new ServerFileHandler();
         }
 
         if(handlers.containsKey(path)) {

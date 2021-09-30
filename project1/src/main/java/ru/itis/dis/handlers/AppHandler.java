@@ -3,10 +3,11 @@ package ru.itis.dis.handlers;
 import ru.itis.dis.HttpHandler;
 import ru.itis.dis.HttpRequest;
 import ru.itis.dis.HttpResponse;
-import ru.itis.dis.utils.FileToStringReader;
+import ru.itis.dis.utils.Constants;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created by IntelliJ IDEA
@@ -21,8 +22,7 @@ import java.io.IOException;
 public class AppHandler implements HttpHandler {
     @Override
     public void process(HttpRequest req, HttpResponse res) throws IOException {
-        FileToStringReader fsr = new FileToStringReader("project1/src/main/webapp/WEB-INF/views/app.html");
-        res.setBody(fsr.readToString());
+        res.setBody(Files.readString(Paths.get(Constants.htmlResPath+"app.html")));
         res.send();
     }
 }

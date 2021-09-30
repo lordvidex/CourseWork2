@@ -11,22 +11,19 @@ import java.nio.file.Paths;
 
 /**
  * Created by IntelliJ IDEA
- * Date: 26.09.2021
- * Time: 1:35 PM
+ * Date: 30.09.2021
+ * Time: 3:17 AM
  *
  * @author lordvidex
  * Name: Овамойо Олувадамилола Эванс
  * <p>
  * Desc:
  */
-public class RootHandler implements HttpHandler {
+public class ServerFileHandler implements HttpHandler {
     @Override
     public void process(HttpRequest req, HttpResponse res) throws IOException {
-        res.setHeader("Content-Type", "text/html");
-
-        // read the body from html file
-        // return the body
-        res.setBody(Files.readString(Paths.get(Constants.htmlResPath+"index.html")));
+        res.setBody(Files.readString(Paths.get(Constants.htmlResPath + req.getPath())));
         res.send();
     }
 }
+
