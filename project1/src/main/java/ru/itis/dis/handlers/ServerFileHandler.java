@@ -7,6 +7,7 @@ import ru.itis.dis.utils.Constants;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -22,7 +23,12 @@ import java.nio.file.Paths;
 public class ServerFileHandler implements HttpHandler {
     @Override
     public void process(HttpRequest req, HttpResponse res) throws IOException {
-        res.setBody(Files.readString(Paths.get(Constants.htmlResPath + req.getPath())));
+        final Path path = Paths.get(Constants.htmlResPath + req.getPath());
+        if(Files.exists(path)) {
+            res.setBody(Files.readString(path));
+        } else {
+            res.setBody(Files.readString(Paths.get(Constants.htmlResPath+"error.html")));
+        }
         res.send();
     }
 }

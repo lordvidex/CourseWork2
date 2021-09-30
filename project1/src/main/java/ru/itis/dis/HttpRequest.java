@@ -21,6 +21,8 @@ public class HttpRequest {
 
     private final Map<String, String> headers;
 
+    private Session session;
+
     private String method;
 
     private String path;
@@ -47,6 +49,14 @@ public class HttpRequest {
 
     public String getHttpVersion() {
         return httpVersion;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 
     public Map<String,String> getCookies() {
@@ -77,7 +87,7 @@ public class HttpRequest {
         // read first line
         int token = isr.read();
         char tokenCharacter = (char) token;
-        while (tokenCharacter != '\n') {
+        while (token != -1 && tokenCharacter != '\n') {
             if (tokenCharacter == '\r') {
                 // gather the data and set values
                 String firstLine = lineBuilder.toString();
@@ -97,7 +107,7 @@ public class HttpRequest {
         token = isr.read();
         tokenCharacter = (char) token;
 
-        while (true) {
+        while (token != -1) {
             if (tokenCharacter != '\r' && tokenCharacter != '\n') {
                 lineCharCount++;
                 lineBuilder.append(tokenCharacter);

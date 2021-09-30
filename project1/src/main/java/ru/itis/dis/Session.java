@@ -11,11 +11,11 @@ package ru.itis.dis;
  * Desc:
  */
 public class Session {
-    private String firstName;
-    private String lastName;
+    String firstName;
+    String lastName;
+
     Session(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
 }

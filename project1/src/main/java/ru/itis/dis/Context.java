@@ -16,18 +16,30 @@ import java.util.Map;
  * Desc:
  */
 public class Context {
+    // stores the URL handlers and their paths
     private final Map<String,HttpHandler> handlers;
+
+    // session map stores the sessionId of a user with his data
+    private final Map<String, Session> sessionMap;
 
     public Context() {
         this.handlers = new HashMap<>();
+        this.sessionMap = new HashMap<>();
     }
 
+    // adds the context to the handlers map
     public void createContext(String path, HttpHandler handler) {
         handlers.put(path,handler);
     }
 
+    // for adding /404 handler for files not found
     public void createNotFoundContext(HttpHandler handler) {
         createContext("/404", handler);
+    }
+
+    // used to get the session for a user, it can be null
+    public Session getSession(String sessionId) {
+        return sessionMap.get(sessionId);
     }
 
     /**

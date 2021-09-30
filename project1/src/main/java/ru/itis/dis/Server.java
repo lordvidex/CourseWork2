@@ -22,12 +22,13 @@ public class Server {
         // create a context and map routes to handlers
         Context context = new Context();
         context.createContext("/", new RootHandler());
+        context.createContext("/login", new LoginHandler());
         context.createContext("/app", new AppHandler());
         context.createNotFoundContext(new ErrorHandler());
 
         try {
             // create a new server socket
-            int port = 9999;
+            int port = 80;
             ServerSocket server = new ServerSocket(port);
             System.out.println("Server running on port "+port);
 
