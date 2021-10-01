@@ -1,6 +1,5 @@
 package ru.itis.dis.handlers;
 
-import ru.itis.dis.HttpHandler;
 import ru.itis.dis.HttpRequest;
 import ru.itis.dis.HttpResponse;
 import ru.itis.dis.Session;
@@ -35,7 +34,7 @@ public class LoginHandler implements HttpHandler {
             // parse body to session and
             // add session to header
             String sessionKey = sessionSetter.setSession(Session.fromString(req.getBody()));
-            res.setCookie("JSESSION", sessionKey,120);
+            res.setCookie("JSESSION", sessionKey,3600);
             body = body.replace("%status%",req.getSession() == null
                     ? "You have successfully logged in!"
                     : "You have been re-authenticated");

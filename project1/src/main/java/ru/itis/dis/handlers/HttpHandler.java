@@ -1,4 +1,7 @@
-package ru.itis.dis;
+package ru.itis.dis.handlers;
+
+import ru.itis.dis.HttpRequest;
+import ru.itis.dis.HttpResponse;
 
 import java.io.IOException;
 

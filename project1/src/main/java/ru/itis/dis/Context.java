@@ -1,5 +1,6 @@
 package ru.itis.dis;
 
+import ru.itis.dis.handlers.HttpHandler;
 import ru.itis.dis.handlers.ServerFileHandler;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import java.util.Map;
  */
 public class Context {
     // stores the URL handlers and their paths
-    private final Map<String,HttpHandler> handlers;
+    private final Map<String, HttpHandler> handlers;
 
     // session map stores the sessionId of a user with his data
     private final Map<String, Session> sessionMap;

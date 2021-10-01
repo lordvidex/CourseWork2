@@ -1,6 +1,5 @@
 package ru.itis.dis.handlers;
 
-import ru.itis.dis.HttpHandler;
 import ru.itis.dis.HttpRequest;
 import ru.itis.dis.HttpResponse;
 import ru.itis.dis.Session;

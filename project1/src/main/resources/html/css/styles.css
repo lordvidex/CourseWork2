@@ -1,22 +1,42 @@
-input[type=text]{
+input[type=text], label {
     border-color: #3498db;
-    border-radius:10px;
+    border-radius: 10px;
     padding: 7px;
+    margin-left: 15px;
+    display: block;
+}
+
+input[type=text]:focus,
+input[type=text]:active {
+    border-color: #4CAF50;
+    border-radius: 10px;
+    outline: none;
+    border-width: 4px;
 }
 
 input[type=submit] {
     margin-top: 20px;
-   min-width: 100px;
+    min-width: 100px;
     min-height: 50px;
     margin-left: auto;
     margin-right: auto;
-display: block;
+    display: block;
     background-color: crimson;
     border-radius: 16px;
-    border-width: 0px;
+    border-width: 0;
     color: white;
     font-weight: bold;
 }
+
+body {
+    text-align: center;
+    background-color: #faebd7;
+    width: 70%;
+    alignment: center;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+
 .button {
     background-color: #4CAFFF;
     border: none;
@@ -25,12 +45,20 @@ display: block;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: block;
     font-size: 16px;
+    outline: none;
+    margin-left: 10px;
+    font-family: "Trebuchet MS", sans-serif;
     transition-duration: 0.4s;
 }
 
 .button:hover {
     background-color: #4CAF50;
-    color: white;
+    color: black;
+
+}
+
+#gotoAppButton:hover {
+    border: 3px solid burlywood;
 }

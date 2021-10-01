@@ -29,6 +29,7 @@ public class Server {
             return key;
         }));
         context.createContext("/app", new AppHandler());
+        context.createContext("/random-number", new RandomNumberHandler());
         context.createNotFoundContext(new ErrorHandler());
 
         try {

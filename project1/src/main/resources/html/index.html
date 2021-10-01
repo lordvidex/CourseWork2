@@ -6,26 +6,26 @@
 </head>
 <script src="js/loader.js" defer></script>
 
-<body style="background-color: #faebd7" onload="pageInit()">
+<body onload="pageInit()">
 <h1>Welcome to Evan's Test Server</h1>
 <div id="loader"></div>
 <div id="container">
     <%cookie%>
     <div style="padding: 10px">
-        <a href="login.html">
-            <button type="button" class="button">
-                LOGIN
-            </button>
-        </a>
+        <button type="button" class="button"
+                onclick="window.location.href = 'login.html'">
+            LOGIN
+        </button>
+
     </div>
     <div>
-        <a href="app.html">
-            <button type="button"
-                    class="button"
-                    style="background-color: #4CAF50">
-                Go To App
-            </button>
-        </a>
+
+        <button type="button"
+                class="button"
+                id="gotoAppButton"
+                onclick="window.location.href='app.html'">
+            Go To App
+        </button>
     </div>
 
 </div>

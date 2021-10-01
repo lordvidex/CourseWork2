@@ -1,9 +1,43 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>App Page</title>
 </head>
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/loader.js" defer></script>
 <body>
-<h1>This is the app page</h1>
-<p>This is the second page after the default page</p>
+<h1>This is the main app page</h1>
+<ul>
+    <li>
+        <h3 style="text-align: left">
+            Get a random number from 1-20 by AJAX "GET" request.
+        </h3>
+    </li>
+    <button onclick="getRandomNumber()"
+            class="button"
+            title="AJAX GET Button"
+            type="button"
+            style="margin-left: 0; margin-right: auto">
+        Get random number
+    </button>
+    <li>
+        <h3 style="text-align: left">
+            Reformat a text/plain text value with your session token by AJAX "POST" request.
+        </h3>
+    </li>
+
+    <label style="display: block"> Text:
+        <input type="text"
+               id="textBox"
+               style="margin-bottom: 20px;"/>
+    </label>
+
+    <button onclick="sendText()"
+            type="button"
+            class="button"
+            title="AJAX POST Button">
+        Encrypt
+    </button>
+</ul>
 </body>
 </html>
