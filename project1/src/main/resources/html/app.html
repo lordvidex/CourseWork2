@@ -26,17 +26,18 @@
         </h3>
     </li>
 
-    <label style="display: block"> Text:
-        <input type="text"
-               id="textBox"
-               style="margin-bottom: 20px;"/>
-    </label>
+    <label for="textBox" style="text-align: left;display: none"> Text:</label>
+    <input type="text"
+           id="textBox"
+           placeholder="Enter text here"
+           style="margin-bottom: 20px;"/>
+
 
     <button onclick="sendText()"
             type="button"
             class="button"
             title="AJAX POST Button">
-        Encrypt
+        Send Message
     </button>
 </ul>
 </body>

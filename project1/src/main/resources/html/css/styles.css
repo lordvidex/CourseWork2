@@ -1,9 +1,15 @@
-input[type=text], label {
+input[type=text] {
     border-color: #3498db;
     border-radius: 10px;
     padding: 7px;
     margin-left: 15px;
     display: block;
+}
+
+label {
+    margin-left: 15px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 input[type=text]:focus,
@@ -31,8 +37,7 @@ input[type=submit] {
 body {
     text-align: center;
     background-color: #faebd7;
-    width: 70%;
-    alignment: center;
+    width: 80%;
     font-family: "Trebuchet MS", sans-serif;
 }
 
@@ -45,7 +50,6 @@ body {
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: block;
     font-size: 16px;
     outline: none;
     margin-left: 10px;
@@ -61,4 +65,9 @@ body {
 
 #gotoAppButton:hover {
     border: 3px solid burlywood;
+}
+
+#container {
+    display: none;
+    height: 500px;
 }

@@ -3,6 +3,7 @@
 <head>
     <title>Test Server</title>
     <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <script src="js/loader.js" defer></script>
 
@@ -10,8 +11,8 @@
 <h1>Welcome to Evan's Test Server</h1>
 <div id="loader"></div>
 <div id="container">
-    <%cookie%>
-    <div style="padding: 10px">
+    <div style="display: block"><%cookie%></div>
+    <div style="margin-bottom: 25px; margin-top: 25px">
         <button type="button" class="button"
                 onclick="window.location.href = 'login.html'">
             LOGIN
@@ -29,6 +30,5 @@
     </div>
 
 </div>
-<link rel="stylesheet" href="css/styles.css"/>
 </body>
 </html>
