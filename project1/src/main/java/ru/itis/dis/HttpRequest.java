@@ -1,5 +1,6 @@
 package ru.itis.dis;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -79,13 +80,13 @@ public class HttpRequest {
     }
 
     private void parseValues(InputStream is) throws IOException {
-        InputStreamReader isr = new InputStreamReader(is);
+
 
         // gather characters until a line is formed
         StringBuilder lineBuilder = new StringBuilder();
 
         // read first line
-        int token = isr.read();
+        int token = is.read();
         char tokenCharacter = (char) token;
         while (token != -1 && tokenCharacter != '\n') {
             if (tokenCharacter == '\r') {
@@ -97,14 +98,14 @@ public class HttpRequest {
                 lineBuilder.append(tokenCharacter);
             }
             // update with new character
-            token = isr.read();
+            token = is.read();
             tokenCharacter = (char) token;
         }
 
         // read headers
         boolean carriage = false;
         int lineCharCount = 0;
-        token = isr.read();
+        token = is.read();
         tokenCharacter = (char) token;
 
         while (token != -1) {
@@ -125,15 +126,14 @@ public class HttpRequest {
                     lineBuilder = new StringBuilder();
                 }
             }
-            token = isr.read();
+            token = is.read();
             tokenCharacter = (char) token;
         }
 
         // read body
         if(headers.containsKey("Content-Length")) {
-            int n;
-            while ((n = isr.read()) != -1) {
-                lineBuilder.append((char) n);
+            while (is.available() != 0) {
+                lineBuilder.append((char) is.read());
             }
             if (lineBuilder.length() != 0) body = lineBuilder.toString();
         }

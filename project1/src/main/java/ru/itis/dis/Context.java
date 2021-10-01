@@ -42,6 +42,11 @@ public class Context {
         return sessionMap.get(sessionId);
     }
 
+    public void setSession(String key, Session session){
+        sessionMap.entrySet().removeIf((e) -> e.getValue().equals(session));
+        this.sessionMap.put(key,session);
+    }
+
     /**
      * Returns an HttpHandler from the map and returns a not found page
      * if the path does not exist or the root page if there is no mapped 404 page

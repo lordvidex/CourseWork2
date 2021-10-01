@@ -5,6 +5,7 @@ import ru.itis.dis.handlers.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA
@@ -22,7 +23,11 @@ public class Server {
         // create a context and map routes to handlers
         Context context = new Context();
         context.createContext("/", new RootHandler());
-        context.createContext("/login", new LoginHandler());
+        context.createContext("/login", new LoginHandler((session) -> {
+            String key = UUID.randomUUID().toString();
+            context.setSession(key,session);
+            return key;
+        }));
         context.createContext("/app", new AppHandler());
         context.createNotFoundContext(new ErrorHandler());
 

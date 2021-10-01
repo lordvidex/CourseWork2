@@ -42,7 +42,7 @@
     to{ bottom:0; opacity:1 }
 }
 
-#myDiv {
+#container {
     display: none;
     text-align: center;
 }

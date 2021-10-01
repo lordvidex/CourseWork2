@@ -3,6 +3,7 @@ package ru.itis.dis.handlers;
 import ru.itis.dis.HttpHandler;
 import ru.itis.dis.HttpRequest;
 import ru.itis.dis.HttpResponse;
+import ru.itis.dis.Session;
 import ru.itis.dis.utils.Constants;
 
 import java.io.IOException;
@@ -26,7 +27,19 @@ public class RootHandler implements HttpHandler {
 
         // read the body from html file
         // return the body
-        res.setBody(Files.readString(Paths.get(Constants.htmlResPath+"index.html")));
+        String result = Files.readString(Paths.get(Constants.htmlResPath+"index.html"));
+        Session userSession = req.getSession();
+        String replacement;
+        if(userSession == null) {
+            replacement=
+                    "<p>You don't have cookies and your sessions have not been saved!</p>";
+        } else {
+            replacement="<p>You are logged in with the details:\nFirst name: "+
+                    userSession.firstName+
+                    "\n"+"Second name: "+userSession.lastName+"</p>";
+        }
+        result = result.replace("<%cookie%>",replacement);
+        res.setBody(result);
         res.send();
     }
 }
