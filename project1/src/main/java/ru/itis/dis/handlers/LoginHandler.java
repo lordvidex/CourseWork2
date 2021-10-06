@@ -33,6 +33,7 @@ public class LoginHandler implements HttpHandler {
        if(sessionSetter != null && req.getBody() != null) {
             // parse body to session and
             // add session to header
+           //username=Evans&password=Evans1
             String sessionKey = sessionSetter.setSession(Session.fromString(req.getBody()));
             res.setCookie("JSESSION", sessionKey,3600);
             body = body.replace("%status%",req.getSession() == null

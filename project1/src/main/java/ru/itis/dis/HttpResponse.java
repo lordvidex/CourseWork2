@@ -89,7 +89,7 @@ public class HttpResponse {
 
     private void addContentLengthHeader() {
         if(body!=null) {
-            setHeader("Content-Length", ""+body.length());
+            setHeader("Content-Length", ""+body.getBytes(StandardCharsets.UTF_8).length);
         }
     }
 
