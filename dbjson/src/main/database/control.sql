@@ -59,16 +59,18 @@ create table animals
     age           numeric     not null,
     stable_number integer references stable (number)
 );
- -- Конюхи
-create table groom (
-    id serial not null primary key,
+-- Конюхи
+create table groom
+(
+    id   serial not null primary key,
     name varchar(70),
-    age int not null check ( age < 51 )
+    age  int    not null check ( age < 51 )
 );
- -- many to many stable/groom
-create table groom_stable (
-    groom_id integer not null references groom(id),
-    stable_number integer not null references stable(number)
+-- many to many stable/groom
+create table groom_stable
+(
+    groom_id      integer not null references groom (id),
+    stable_number integer not null references stable (number)
 );
 
 -- Конюшня
@@ -77,4 +79,18 @@ create table stable
     number        serial  not null primary key,
     stall_number  integer check (stall_number > 9 and stall_number < 51),
     veterinary_id integer not null references veterinary (id)
-)
+);
+
+-- 6
+select passenger_id, passenger_name
+from tickets
+         join
+     (select distinct(ticket_no) as ticket_no
+      from (select *
+            from flights
+            where arrival_airport = 'LED'
+              and scheduled_departure between '2017-08-05' and '2017-08-06') as pulkovo_timed_flights
+               join seats on pulkovo_timed_flights.aircraft_code = seats.aircraft_code
+               join ticket_flights on pulkovo_timed_flights.flight_id = ticket_flights.flight_id
+      where seats.fare_conditions = 'Economy') as ticket_number
+        on ticket_number.ticket_no = tickets.ticket_no;
