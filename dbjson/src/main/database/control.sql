@@ -94,3 +94,24 @@ from tickets
                join ticket_flights on pulkovo_timed_flights.flight_id = ticket_flights.flight_id
       where seats.fare_conditions = 'Economy') as ticket_number
         on ticket_number.ticket_no = tickets.ticket_no;
+
+-- 7 (нет результата [работает от '2017-07-15'])
+select scheduled_departure,
+       flight_no,
+       departure_airport,
+       arrival_airport,
+       person.passenger_name from flights
+    join
+           (select * from tickets join ticket_flights tf on tickets.ticket_no = tf.ticket_no) as person
+on person.flight_id = flights.flight_id
+where scheduled_departure between '2017-07-05' and '2017-07-06';
+--
+-- select scheduled_departure,
+--        flight_no,
+--        departure_airport,
+--        arrival_airport,
+--        person.passenger_name from flights
+--                                       join
+--                                   (select * from tickets join ticket_flights tf on tickets.ticket_no = tf.ticket_no) as person
+--                                   on person.flight_id = flights.flight_id
+-- where scheduled_departure between '2017-07-15' and '2017-07-16';
