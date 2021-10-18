@@ -93,17 +93,20 @@ from tickets
                join seats on pulkovo_timed_flights.aircraft_code = seats.aircraft_code
                join ticket_flights on pulkovo_timed_flights.flight_id = ticket_flights.flight_id
       where seats.fare_conditions = 'Economy') as ticket_number
-        on ticket_number.ticket_no = tickets.ticket_no;
+     on ticket_number.ticket_no = tickets.ticket_no;
 
 -- 7 (нет результата [работает от '2017-07-15'])
 select scheduled_departure,
        flight_no,
        departure_airport,
        arrival_airport,
-       person.passenger_name from flights
-    join
-           (select * from tickets join ticket_flights tf on tickets.ticket_no = tf.ticket_no) as person
-on person.flight_id = flights.flight_id
+       person.passenger_name
+from flights
+         join
+     (select *
+      from tickets
+               join ticket_flights tf on tickets.ticket_no = tf.ticket_no) as person
+     on person.flight_id = flights.flight_id
 where scheduled_departure between '2017-07-05' and '2017-07-06';
 --
 -- select scheduled_departure,
@@ -115,3 +118,35 @@ where scheduled_departure between '2017-07-05' and '2017-07-06';
 --                                   (select * from tickets join ticket_flights tf on tickets.ticket_no = tf.ticket_no) as person
 --                                   on person.flight_id = flights.flight_id
 -- where scheduled_departure between '2017-07-15' and '2017-07-16';
+
+
+-- 4
+select * from airports_data;
+create function getDistance(p1 point, p2 point) returns float
+    language plpgsql as
+$$
+declare
+    radLatP1 float;
+    radLatP2 float;
+    theta float;
+    radTheta float;
+    angle float;
+    result float = 0;
+begin
+    radLatP1 = pi() * p1[1] / 180;
+    radLatP2 = pi() * p2[1] / 180;
+    theta = p1[0] - p2[0];
+    radTheta = pi() * theta / 180;
+    angle = sin(radLatP1) * sin(radLatP2) + cos(radLatP1) * cos(radLatP2) * cos(radTheta);
+
+    IF angle > 1 THEN angle = 1; END IF;
+
+    result = acos(angle) * 180 / pi();
+    result = result * 60 * 1.1515 * 1.609344;
+    return result;
+end;
+$$;
+
+select getDistance((select coordinates from airports_data where airport_name::json ->> 'ru' = 'Сургут'),
+    (select coordinates from airports_data where airport_name::json ->> 'ru' = 'Псков'));
+
