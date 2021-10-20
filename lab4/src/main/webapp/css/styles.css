@@ -1,0 +1,73 @@
+input[type=text] {
+    border-color: #3498db;
+    border-radius: 10px;
+    padding: 7px;
+    margin-left: 15px;
+    display: block;
+}
+
+label {
+    margin-left: 15px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type=text]:focus,
+input[type=text]:active {
+    border-color: #4CAF50;
+    border-radius: 10px;
+    outline: none;
+    border-width: 4px;
+}
+
+input[type=submit] {
+    margin-top: 20px;
+    min-width: 100px;
+    min-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: crimson;
+    border-radius: 16px;
+    border-width: 0;
+    color: white;
+    font-weight: bold;
+}
+
+body {
+    text-align: center;
+    background-color: #faebd7;
+    width: 80%;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+
+.button {
+    background-color: #4CAFFF;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    outline: none;
+    margin-left: 10px;
+    font-family: "Trebuchet MS", sans-serif;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: #4CAF50;
+    color: black;
+
+}
+
+#gotoAppButton:hover {
+    border: 3px solid burlywood;
+}
+
+#container {
+    display: none;
+    height: 500px;
+}
