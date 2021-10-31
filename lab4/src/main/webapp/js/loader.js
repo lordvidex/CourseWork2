@@ -10,13 +10,13 @@ function hideLoader() {
 // AJAX - functions
 function getRandomNumber() {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET','/random-number',true);
+    xhr.open('GET','random-number',true);
     xhr.send();
 
     xhr.onreadystatechange = function (ev) {
         if ((xhr.status === 200) && (xhr.readyState === 4)) {
             alert(xhr.response);
-        } else if (xhr.status !== 200) {
+        } else if (xhr.status !== 200 && xhr.readyState === 4) {
             console.log(ev.type, xhr.status, xhr.readyState);
             alert('An error occurred');
         }
@@ -25,7 +25,7 @@ function getRandomNumber() {
 
 function sendText() {
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/random-number',true);
+    xhr.open('POST', 'random-number',true);
 
     const text = document.getElementById('textBox').value;
     xhr.send(text);
@@ -33,7 +33,7 @@ function sendText() {
     xhr.onreadystatechange = function(ev) {
         if ((xhr.status === 200) && (xhr.readyState === 4)) {
             alert(xhr.response);
-        } else if (xhr.status !== 200) {
+        } else if (xhr.status !== 200 && xhr.readyState === 4) {
             console.log(ev.type)
             alert('An error occurred');
         }

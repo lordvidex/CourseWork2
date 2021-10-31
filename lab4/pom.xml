@@ -25,14 +25,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.guicedee.services</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>1.2.0.3-jre17-rc1</version>
-    </dependency>
-    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>3.0.1</version>
+      <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -78,5 +73,15 @@
         </plugin>
       </plugins>
     </pluginManagement>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>10</source>
+                  <target>10</target>
+              </configuration>
+          </plugin>
+      </plugins>
   </build>
 </project>

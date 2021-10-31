@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <title>Test Server</title>
-    <link rel="stylesheet" href="css/loader.css">
-    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="/lab4/css/loader.css">
+    <link rel="stylesheet" href="/lab4/css/styles.css"/>
+    <script type="text/javascript" src="/lab4/js/loader.js" defer></script>
 </head>
-<script src="js/loader.js" defer></script>
 
 <body onload="pageInit()">
 <h1>Welcome to Evan's Test Server</h1>
 <div id="loader"></div>
 <div id="container">
-    <div style="display: block"><%cookie%></div>
+    <div style="display: block"><p>${message}</p></div>
     <div style="margin-bottom: 25px; margin-top: 25px">
         <button type="button" class="button"
-                onclick="window.location.href = 'html/login.html'">
+                onclick="window.location.href = 'login'">
             LOGIN
         </button>
 
@@ -24,7 +24,7 @@
         <button type="button"
                 class="button"
                 id="gotoAppButton"
-                onclick="window.location.href='app.html'">
+                onclick="window.location.href='app'">
             Go To App
         </button>
     </div>
