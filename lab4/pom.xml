@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>lab4 Maven Webapp</name>
+  <name>lab4 ServletWebApp</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,7 +39,7 @@
   </dependencies>
 
   <build>
-    <finalName>lab4</finalName>
+    <finalName>${project.artifactId}</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
@@ -74,6 +74,18 @@
       </plugins>
     </pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.3.1</version>
+          <configuration>
+            <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+            <webResources>
+              <resource>src/main/webapp</resource>
+              <resource>src/main/resources</resource>
+              </webResources>
+          </configuration>
+        </plugin>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-compiler-plugin</artifactId>

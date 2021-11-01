@@ -25,11 +25,11 @@ public class RootServlet extends HttpServlet {
                 .collect(Collectors.toMap(Cookie::getName, Function.identity()));
         String name = "";
         if(cookies.get("firstName") != null){
-            name+=cookies.get("firstName")+" ";
+            name+=cookies.get("firstName").getValue()+" ";
         }
 
         if (cookies.get("lastName") != null) {
-            name+= cookies.get("lastName");
+            name+= cookies.get("lastName").getValue();
         }
         if (name.trim().isEmpty()) {
             req.setAttribute("message", "You don't have cookies and your sessions have not been saved!");
