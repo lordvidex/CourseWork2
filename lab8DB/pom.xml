@@ -2,27 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dis</artifactId>
+        <groupId>ru.itis.dis</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.itis.dis</groupId>
-    <artifactId>dis</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>lab1</module>
-        <module>lab2</module>
-        <module>dbjson</module>
-        <module>lab3</module>
-        <module>project1</module>
-        <module>lab4</module>
-        <module>lab6filter</module>
-        <module>lab8DB</module>
-        <module>lab9</module>
-    </modules>
+    <artifactId>lab8DB</artifactId>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.1</version>
+        </dependency>
+    </dependencies>
 
 </project>
