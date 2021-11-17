@@ -18,6 +18,7 @@
         <module>lab6filter</module>
         <module>lab8DB</module>
         <module>lab9</module>
+        <module>calculator</module>
     </modules>
 
     <properties>

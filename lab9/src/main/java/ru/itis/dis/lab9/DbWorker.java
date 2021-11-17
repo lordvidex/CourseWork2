@@ -17,20 +17,20 @@ import java.sql.SQLException;
  * Desc:
  */
 public class DbWorker {
-//    private static volatile DbWorker db;
+    private static volatile DbWorker db;
 //
     private DbWorker() {}
 //
-//    public static DbWorker getInstance() {
-//        if (db == null) {
-//            synchronized(DbWorker.class) {
-//                if (db == null) {
-//                    db = new DbWorker();
-//                }
-//            }
-//        }
-//        return db;
-//    }
+    public static DbWorker getInstance() {
+        if (db == null) {
+            synchronized(DbWorker.class) {
+                if (db == null) {
+                    db = new DbWorker();
+                }
+            }
+        }
+        return db;
+    }
     public static Connection getConnection() {
         try {
             Class.forName("org.postgresql.Driver");

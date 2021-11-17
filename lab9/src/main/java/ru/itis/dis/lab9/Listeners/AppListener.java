@@ -22,7 +22,7 @@ public class AppListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("App Listener init");
-//        DbWorker.getInstance();
+        DbWorker.getInstance();
     }
 
     @Override

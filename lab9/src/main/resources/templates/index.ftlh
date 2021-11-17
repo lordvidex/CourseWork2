@@ -10,9 +10,17 @@
 
 <div>
 
-    <table>
+    <table width="50%" align="center">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>PHONE</th>
+            <th>CAR_ID</th>
+        </tr>
+        </thead>
         <#list lstDriver as lst>
-            <tr>
+            <tr align="center">
                 <td>${lst.id}</td>
                 <td>${lst.name}</td>
                 <td>${lst.phone}</td>
