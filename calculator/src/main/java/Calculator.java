@@ -4,12 +4,13 @@
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+
 public class Calculator extends JFrame implements ActionListener {
     // create a frame
-    static JFrame f;
+    static JFrame frame;
 
     // create a textfield
-    static JTextField l;
+    static JTextField textArea;
 
     // store operator and operands
     String s0, s1, s2;
@@ -21,27 +22,25 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     // main function
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         // create a frame
-        f = new JFrame("Calculator");
+        frame = new JFrame("Calculator");
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultLookAndFeelDecorated(true);
 
-        try {
-            // set look and feel
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-
-        // create a object of class
         Calculator c = new Calculator();
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName() );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // create a textfield
-        l = new JTextField(16);
+        textArea = new JTextField(16);
 
         // set the textfield to non editable
-        l.setEditable(false);
+        textArea.setEditable(false);
 
         // create number buttons and some operators
         JButton b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, ba, bs, bd, bm, be, beq, beq1;
@@ -72,17 +71,52 @@ public class Calculator extends JFrame implements ActionListener {
         be = new JButton(".");
 
         // create a panel
-        JPanel p = new JPanel();
+        JPanel panel = new JPanel();
 
         // add action listeners
-        bm.addActionListener(c);
-        bd.addActionListener(c);
-        bs.addActionListener(c);
-        ba.addActionListener(c);
-        b9.addActionListener(c);
-        b8.addActionListener(c);
-        b7.addActionListener(c);
-        b6.addActionListener(c);
+        addListener(c, b8, b9, ba, bs, bd, bm, b7, b6);
+        addListener(c, b0, b1, b2, b3, b4, b5, be, beq);
+        beq1.addActionListener(c);
+
+        // add elements to panel
+        panel.add(textArea);
+        panel.add(ba);
+        panel.add(b1);
+        panel.add(b2);
+        panel.add(b3);
+        panel.add(bs);
+        panel.add(b4);
+        panel.add(b5);
+        panel.add(b6);
+        panel.add(bm);
+        panel.add(b7);
+        panel.add(b8);
+        panel.add(b9);
+        panel.add(bd);
+        panel.add(be);
+        panel.add(b0);
+        panel.add(beq);
+        panel.add(beq1);
+
+        // set Background of panel
+        panel.setBackground(Color.GRAY);
+
+        // add panel to frame
+        frame.add(panel);
+
+        frame.setSize(500, 500);
+        frame.setVisible(true);
+    }
+
+    private static void addListener(Calculator c,
+                                    JButton b0,
+                                    JButton b1,
+                                    JButton b2,
+                                    JButton b3,
+                                    JButton b4,
+                                    JButton b5,
+                                    JButton be,
+                                    JButton beq) {
         b5.addActionListener(c);
         b4.addActionListener(c);
         b3.addActionListener(c);
@@ -91,39 +125,9 @@ public class Calculator extends JFrame implements ActionListener {
         b0.addActionListener(c);
         be.addActionListener(c);
         beq.addActionListener(c);
-        beq1.addActionListener(c);
-
-        // add elements to panel
-        p.add(l);
-        p.add(ba);
-        p.add(b1);
-        p.add(b2);
-        p.add(b3);
-        p.add(bs);
-        p.add(b4);
-        p.add(b5);
-        p.add(b6);
-        p.add(bm);
-        p.add(b7);
-        p.add(b8);
-        p.add(b9);
-        p.add(bd);
-        p.add(be);
-        p.add(b0);
-        p.add(beq);
-        p.add(beq1);
-
-        // set Background of panel
-        p.setBackground(Color.blue);
-
-        // add panel to frame
-        f.add(p);
-
-        f.setSize(500, 900);
-        f.show();
     }
-    public void actionPerformed(ActionEvent e)
-    {
+
+    public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
 
         // if the value is a number
@@ -135,14 +139,14 @@ public class Calculator extends JFrame implements ActionListener {
                 s0 = s0 + s;
 
             // set the value of text
-            l.setText(s0 + s1 + s2);
+            textArea.setText(s0 + s1 + s2);
         }
         else if (s.charAt(0) == 'C') {
             // clear the one letter
             s0 = s1 = s2 = "";
 
             // set the value of text
-            l.setText(s0 + s1 + s2);
+            textArea.setText(s0 + s1 + s2);
         }
         else if (s.charAt(0) == '=') {
 
@@ -159,7 +163,7 @@ public class Calculator extends JFrame implements ActionListener {
                 te = (Double.parseDouble(s0) * Double.parseDouble(s2));
 
             // set the value of text
-            l.setText(s0 + s1 + s2 + "=" + te);
+            textArea.setText(s0 + s1 + s2 + "=" + te);
 
             // convert it to string
             s0 = Double.toString(te);
@@ -195,7 +199,7 @@ public class Calculator extends JFrame implements ActionListener {
             }
 
             // set the value of text
-            l.setText(s0 + s1 + s2);
+            textArea.setText(s0 + s1 + s2);
         }
     }
 }
