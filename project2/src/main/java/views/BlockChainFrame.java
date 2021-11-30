@@ -1,7 +1,6 @@
 package views;
 
 import controllers.BlockController;
-import models.Block;
 import models.BlockChain;
 import models.BlockData;
 

@@ -90,12 +90,12 @@ public class BlockDbService implements BlockService {
 
     private void preConnect(Connection conn) {
         try {
-            conn.createStatement().execute("CREATE TABLE user_block_data(" +
+            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS user_block_data(" +
                     "id SERIAL NOT NULL PRIMARY KEY," +
                     "data TEXT," +
                     "name TEXT" +
                     ");");
-            conn.createStatement().execute("CREATE TABLE user_blocks(" +
+            conn.createStatement().execute("CREATE TABLE IF NOT EXISTS user_blocks(" +
                     "prevhash VARCHAR(64)," +
                     "signature VARCHAR(256)," +
                     "data_id INTEGER REFERENCES user_block_data(id)," +

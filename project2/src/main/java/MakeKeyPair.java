@@ -14,9 +14,9 @@ public class MakeKeyPair {
         Security.addProvider(new BouncyCastleProvider());
 
         KeyPairGenerator rsa = null;
-        try (Writer publicKeyWriter = new FileWriter("public.key");
-             Writer privateKeyWriter = new FileWriter("private.key")) {
-            rsa = KeyPairGenerator.getInstance("RSA",BouncyCastleProvider.PROVIDER_NAME);
+        try (Writer publicKeyWriter = new FileWriter("project2/src/main/public.key");
+             Writer privateKeyWriter = new FileWriter("project2/src/main/private.key")) {
+            rsa = KeyPairGenerator.getInstance("RSA");
             rsa.initialize(1024, new SecureRandom());
             KeyPair keyPair = rsa.generateKeyPair();
 
