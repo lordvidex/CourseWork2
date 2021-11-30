@@ -33,11 +33,16 @@ public class BlockController {
     private BlockRESTService api;
 
     public BlockChain getBlockChain() {
-        return api.getChain();
+
+        BlockChain chain = api.getChain();
+        verify(chain);
+        return chain;
     }
 
     public BlockChain getUserBlocks() {
-        return db.getChain();
+        BlockChain chain = db.getChain();
+        verify(chain);
+        return chain;
     }
 
     public void createNewBlock(BlockData data) {
@@ -59,7 +64,9 @@ public class BlockController {
                     "An error occured while creating new Block",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
 
-        // notifyListeners()
+    private void verify(BlockChain chain) {
+        chain.getBlocks().forEach(b -> b.setVerified(signer.verifySignature(b.getPublickey(),b.getData(), b.getSignature())));
     }
 }

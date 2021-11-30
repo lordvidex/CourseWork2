@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -29,9 +30,10 @@ public class Block {
     private BlockData data;
     private String ts;
     private String publickey;
+    @JsonIgnore private boolean verified = true;
 
     public String[] toRowData() {
-        return new String[] {prevhash, signature, data.getName(), data.getData(), ts, publickey};
+        return new String[] {prevhash, signature, data.getName(), data.getData(), ts, publickey, verified ? "Yes": "No"};
     }
 
     public String toJsonString() throws JsonProcessingException {

@@ -40,7 +40,7 @@ public class BlockChainFrame extends JFrame implements ActionListener {
             "Name",
             "Data",
             "Time",
-            "Public Key"};
+            "Public Key", "Verified"};
 
     public BlockChainFrame(BlockController controller) {
         this.controller = controller;

@@ -1,15 +1,12 @@
 package services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.RequiredArgsConstructor;
 import models.Block;
 import models.BlockData;
 import org.bouncycastle.util.encoders.Hex;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -89,6 +86,23 @@ public class SignService {
         } catch (JsonProcessingException | NoSuchAlgorithmException | SignatureException | InvalidKeyException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public boolean verifySignature(String blockPubKey, BlockData data, String blockSignature) {
+        Signature signature = null;
+        if (blockSignature == null || blockPubKey == null) {
+            System.out.println("One of them is null");
+            return false;
+        }
+        try {
+            signature = Signature.getInstance(SIGN_ALGORITHM);
+            signature.initVerify(convertArrayToPublicKey(Hex.decode(blockPubKey), KEY_ALGORITHM));
+            signature.update(data.toJsonString().getBytes(StandardCharsets.UTF_8));
+            return signature.verify(Hex.decode(blockSignature));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
