@@ -20,6 +20,7 @@
         <module>lab9</module>
         <module>calculator</module>
         <module>project2</module>
+        <module>s2_lab1</module>
     </modules>
 
     <properties>
