@@ -1,4 +1,4 @@
-package models;
+package ru.itis.models;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

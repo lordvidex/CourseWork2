@@ -1,8 +1,8 @@
 package services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import models.Block;
-import models.BlockData;
+import ru.itis.models.Block;
+import ru.itis.models.BlockData;
 import org.bouncycastle.util.encoders.Hex;
 
 import java.io.BufferedReader;

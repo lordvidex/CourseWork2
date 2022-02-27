@@ -17,10 +17,10 @@ import ru.itis.dis.s2lab1.components.TestComponent;
 /**
  * IoC Inversion of Control
  */
-public class AnnotationScanner {
+public class MyApplication {
 
     public static void main(String[] args) {
-        Context appContext = new Context(AnnotationScanner.class);
+        Context appContext = new Context(MyApplication.class);
 
         System.out.println("---------------------------------");
 
@@ -35,10 +35,9 @@ public class AnnotationScanner {
         /* Instance from appContext should be equal to TestClass's field */
         TestComponent t1 = appContext.get(TestComponent.class);
         TestComponent t2 = testClass.testComponent;
-        System.out.println(t1 + " is"
+        System.out.println(t1.hashCode() + " is"
                 + (t1.equals(t2) ? " " : " NOT ")
-                + "equal to " + t2
-        );
+                + "equal to " + t2.hashCode());
 
     }
 }

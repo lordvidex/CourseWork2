@@ -1,8 +1,8 @@
 package views;
 
 import controllers.BlockController;
-import models.BlockChain;
-import models.BlockData;
+import ru.itis.models.BlockChain;
+import ru.itis.models.BlockData;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

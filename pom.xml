@@ -21,6 +21,7 @@
         <module>calculator</module>
         <module>project2</module>
         <module>s2_lab1</module>
+        <module>s2_lab2</module>
     </modules>
 
     <properties>

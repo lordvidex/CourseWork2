@@ -9,18 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lab8DB</artifactId>
+    <artifactId>s2_lab2</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>ru.itis.dis</groupId>
+            <artifactId>s2_lab1</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.3.2</version>
-        </dependency>
-    </dependencies>
 
 </project>

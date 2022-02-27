@@ -1,7 +1,7 @@
 package services;
 
-import models.Block;
-import models.BlockChain;
+import ru.itis.models.Block;
+import ru.itis.models.BlockChain;
 
 /**
  * Created by IntelliJ IDEA

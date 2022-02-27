@@ -1,8 +1,8 @@
 package services;
 
-import models.Block;
-import models.BlockChain;
-import models.BlockData;
+import ru.itis.models.Block;
+import ru.itis.models.BlockChain;
+import ru.itis.models.BlockData;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

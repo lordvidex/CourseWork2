@@ -1,8 +1,8 @@
 package services;
 
-import models.Block;
-import models.BlockChain;
-import models.NewBlockResponse;
+import ru.itis.models.Block;
+import ru.itis.models.BlockChain;
+import ru.itis.models.NewBlockResponse;
 
 import java.io.*;
 import java.net.HttpURLConnection;
