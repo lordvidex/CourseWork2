@@ -1,9 +1,6 @@
 package ru.itis;
 
-import ru.itis.annotations.Column;
-import ru.itis.annotations.Entity;
-import ru.itis.annotations.PrimaryColumn;
-import ru.itis.dis.s2lab1.Context;
+import ru.itis.annotations.*;
 import ru.itis.dis.s2lab1.PathScan;
 import ru.itis.repositories.DbRepository;
 import ru.itis.utils.Converter;
@@ -12,7 +9,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA
@@ -54,7 +50,9 @@ public class DatabaseContext {
                 for (Field field : cl.getDeclaredFields()) {
                     field.setAccessible(true);
                     if (field.getAnnotation(Column.class) != null
-                            || field.getAnnotation(PrimaryColumn.class) != null) {
+                            || field.getAnnotation(PrimaryColumn.class) != null
+                            || field.getAnnotation(OneToMany.class) != null
+                    ) {
                         String fieldName = Converter.camelCaseToSnakeCase(field.getName());
                         entityFields.add(fieldName);
                     }
@@ -69,20 +67,20 @@ public class DatabaseContext {
 
         DbRepository dbRepo = new DbRepository();
 
-        for (var e: entities.entrySet()) {
+        for (var e : entities.entrySet()) {
             if (dbRepo.containsEntity(e.getKey())) {
                 printLine(e.getKey(), false, true);
                 e.getValue().forEach(val -> printLine(val, true, dbRepo.containsField(val, e.getKey())));
             } else {
-                printLine(e.getKey(),false,false);
-                e.getValue().forEach(val -> printLine(val,true, false));
+                printLine(e.getKey(), false, false);
+                e.getValue().forEach(val -> printLine(val, true, false));
             }
         }
     }
 
     private void printLine(String text, boolean isField, boolean success) {
-        String emoji = success ? "✅": "❌";
-        String space = isField ? "\t": "";
-        System.out.println(space+emoji+text);
+        String emoji = success ? "✅" : "❌";
+        String space = isField ? "\t" : "";
+        System.out.println(space + emoji + " " + text);
     }
 }
