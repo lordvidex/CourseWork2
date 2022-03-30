@@ -21,7 +21,7 @@ import java.util.List;
  * Desc:
  */
 public class DatabaseContext {
-    private final HashMap<String, List<String>> entities;
+    public final HashMap<String, List<String>> entities;
 
     public DatabaseContext(Class<?> mainClass) {
         entities = new HashMap<>();
