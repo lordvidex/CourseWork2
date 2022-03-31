@@ -1,11 +1,17 @@
 # create new car
 POST http://localhost:8080/cars
+Content-Type: application/json
 
 {
-"model": "Xian"
-"number": "43FBSIFN"
+"model": "Xianss",
+"number": "43FBSIFNRE"
 }
+
 ###
 GET http://localhost:8080/cars/1
+
 ###
-DELETE http://localhost:8080/cars/1
+
+
+###
+DELETE http://localhost:8080/cars/5

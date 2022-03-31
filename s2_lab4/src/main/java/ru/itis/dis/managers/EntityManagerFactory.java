@@ -1,9 +1,7 @@
 package ru.itis.dis.managers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.itis.dis.Application;
 //import ru.itis.dis.DatabaseContext;
-import ru.itis.dis.DbWorker;
+import ru.itis.dis.utils.DbWorker;
 import ru.itis.dis.utils.SQLHelper;
 
 import java.sql.Connection;

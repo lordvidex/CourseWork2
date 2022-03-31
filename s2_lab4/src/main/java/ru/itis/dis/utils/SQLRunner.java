@@ -1,6 +1,4 @@
-package ru.itis.dis.managers;
-
-import ru.itis.dis.DbWorker;
+package ru.itis.dis.utils;
 
 import javax.persistence.Column;
 import java.lang.reflect.Field;
@@ -18,17 +16,25 @@ import java.util.Objects;
  * Desc:
  */
 public class SQLRunner {
-    static void insert(String sql) throws SQLException {
-        var result = Objects.requireNonNull(DbWorker.getConnection())
-                .prepareStatement(sql,0).executeQuery();
-        System.out.println(result);
+    public static Long insert(String sql) throws SQLException {
+        var statement = Objects.requireNonNull(DbWorker.getConnection())
+                .prepareStatement(sql, new String[]{"id"});
+//        var result = statement.executeQuery();
+        int affectedRows = statement.executeUpdate();
+        if (affectedRows > 0) {
+            var result = statement.getGeneratedKeys();
+            result.next();
+            return result.getLong("id");
+        }
+        return null;
     }
 
-    static <T> T find(String sql, Class<T> clazz) throws SQLException, InstantiationException, IllegalAccessException {
+    public static <T> T find(String sql, Class<T> clazz) throws SQLException, InstantiationException, IllegalAccessException {
         var result = Objects.requireNonNull(DbWorker.getConnection())
                 .prepareStatement(sql).executeQuery();
-        T obj = clazz.newInstance();
+        T obj = null;
         while(result.next()) {
+            obj = clazz.newInstance();
             for (Field f: obj.getClass().getDeclaredFields()) {
                 f.setAccessible(true);
                 if(f.isAnnotationPresent(Column.class)) {
@@ -38,6 +44,10 @@ public class SQLRunner {
             }
         }
         return obj;
+    }
+
+    public static void remove(String sql) throws SQLException {
+        DbWorker.getConnection().prepareStatement(sql, new String[]{"id"}).execute();
     }
 
     static Object parseToType(Class<?> type, String value) {

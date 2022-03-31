@@ -1,4 +1,4 @@
-package ru.itis.dis;
+package ru.itis.dis.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

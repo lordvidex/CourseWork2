@@ -5,7 +5,7 @@ public interface EntityManager {
     /**
      * Метод сохраняет в БД объект var1
      */
-    void persist(Object var1) throws Exception;//SQL insert
+    <T> T persist(Object var1) throws Exception;//SQL insert
 
     /**
      * Метод обновляет в БД данные, соответствующие объекту
@@ -15,7 +15,7 @@ public interface EntityManager {
     /**
      * Метод удаляет объект из БД
      */
-    void remove(Object var1) throws Exception; //SQL delete
+    <T> void remove(Class<T> var1, Object var2) throws Exception; //SQL delete
 
     /**
      * Метод запрашивает из базы данных информацию, соответствующую первичному ключу var2.

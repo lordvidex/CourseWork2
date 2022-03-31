@@ -1,6 +1,9 @@
 package ru.itis.dis.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.codec.json.Jackson2JsonEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ru.itis.dis.managers.EntityManager;
 import ru.itis.dis.managers.EntityManagerFactory;
 import ru.itis.dis.entities.Cars;
@@ -29,16 +32,33 @@ public class CarsController {
         this.entityManagerFactory = entityManagerFactory;
     }
 
+    @PostMapping
+    public Cars createCar(@RequestBody Cars car) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            return em.persist(car);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @GetMapping("/{id}")
     public Cars getCarWithId(@PathVariable String id) throws Exception {
        EntityManager em = entityManagerFactory.createEntityManager();
-        return em.find(Cars.class,id);
+        Cars result = em.find(Cars.class,id);
+        if (result == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Car with id "+id+" not found");
+        } else {
+            return result;
+        }
     }
 
     @DeleteMapping("/{id}")
-    public Object deleteCarWithId(@PathVariable String id) throws Exception {
-        return new HashMap<>(){{
-            put("deleted", true);
-        }};
+    public Cars deleteCarWithId(@PathVariable String id) throws Exception {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        Cars toBeDeleted = getCarWithId(id);
+        em.remove(Cars.class,id);
+        return toBeDeleted;
     }
 }

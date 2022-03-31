@@ -93,7 +93,7 @@ public class SQLHelper {
 
     public String valuesForObject(Set<String> fields, Object entity) throws IllegalAccessException {
         ArrayList<String> values = new ArrayList<>();
-        Set<Field> entityFields = new HashSet<>(List.of(entity.getClass().getFields()));
+        Set<Field> entityFields = new HashSet<>(List.of(entity.getClass().getDeclaredFields()));
         for(String key: fields) {
             for (Field f: entityFields) {
                 f.setAccessible(true);
@@ -120,6 +120,7 @@ public class SQLHelper {
             throw new NotAnEntityException();
         }
 
+        getFields(tableName);
         var set = new HashSet<>(fields.get(tableName)) {{
             remove("id");
         }};
@@ -128,8 +129,7 @@ public class SQLHelper {
                 + "("+ String.join(",",set) +")"
                 + " VALUES (" +
                     valuesForObject(set, instance)
-                +");"
-                ;
+                +");";
     }
     // generate find statement
     public String findQuery(Class<?> clazz, String id) {
@@ -138,6 +138,12 @@ public class SQLHelper {
                 + " WHERE id="
                 +id+";";
     }
+
+    public String removeQuery(Class<?> clazz, String id) {
+        String tableName = clazz.getAnnotation(Table.class).name();
+        return "DELETE FROM "+ tableName + " WHERE id=" + id + ";";
+    }
+
 
     // generate delete statement
 

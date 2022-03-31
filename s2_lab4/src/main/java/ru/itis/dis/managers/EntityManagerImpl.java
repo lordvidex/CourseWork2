@@ -2,6 +2,7 @@ package ru.itis.dis.managers;
 
 import ru.itis.dis.exceptions.NotAnEntityException;
 import ru.itis.dis.utils.SQLHelper;
+import ru.itis.dis.utils.SQLRunner;
 
 
 import javax.persistence.Entity;
@@ -28,9 +29,10 @@ public class EntityManagerImpl implements EntityManager {
         this.helper = helper;
     }
     @Override
-    public void persist(Object var1) throws Exception {
+    public <T> T persist(Object var1) throws Exception {
         isEntity(var1); // check if it's an entity
-//        connection.createStatement().execute
+        Long id = SQLRunner.insert(helper.insertQuery(var1));
+        return (T) find(var1.getClass() , id);
     }
 
     @Override
@@ -39,8 +41,8 @@ public class EntityManagerImpl implements EntityManager {
     }
 
     @Override
-    public void remove(Object var1) throws Exception {
-
+    public <T> void remove(Class<T> var1, Object var2) throws Exception {
+        SQLRunner.remove(helper.removeQuery(var1,var2.toString()));
     }
 
     @Override
