@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 public class SQLRunner {
     public static Long insert(String sql) throws SQLException {
+        System.out.println(sql);
         var statement = Objects.requireNonNull(DbWorker.getConnection())
                 .prepareStatement(sql, new String[]{"id"});
 //        var result = statement.executeQuery();
@@ -48,6 +49,10 @@ public class SQLRunner {
 
     public static void remove(String sql) throws SQLException {
         DbWorker.getConnection().prepareStatement(sql, new String[]{"id"}).execute();
+    }
+
+    public static Long update(String sql) throws SQLException {
+        return insert(sql);
     }
 
     static Object parseToType(Class<?> type, String value) {

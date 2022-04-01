@@ -7,11 +7,19 @@ Content-Type: application/json
 "number": "43FBSIFNRE"
 }
 
-###
+### GET
 GET http://localhost:8080/cars/1
 
-###
+### Edit car
+PUT http://localhost:8080/cars/7
+Content-Type: application/json
+
+{
+  "model": "Xiames",
+  "number": "419CARX"
+}
 
 
-###
+
+### Delete car
 DELETE http://localhost:8080/cars/5

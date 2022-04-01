@@ -7,6 +7,7 @@ import ru.itis.utils.Constants;
 import ru.itis.utils.DbWorker;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -110,12 +111,41 @@ public class SQLHelper {
         }
         return String.join(",", values);
     }
+    public String idForObject(Object entity) throws IllegalAccessException {
+        for (Field field: entity.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            if (field.isAnnotationPresent(Id.class)
+                    || field.getAnnotation(Column.class).name().equals("id")) {
+                return field.get(entity).toString();
+            }
+        }
+        return null;
+    }
+
+    public String keyValue(Set<String> fields, Object entity) throws IllegalAccessException {
+        StringBuilder builder = new StringBuilder();
+        boolean hasField = false;
+        for(Field f: entity.getClass().getDeclaredFields()) {
+            f.setAccessible(true);
+            if (f.isAnnotationPresent(Column.class) && fields.contains(f.getAnnotation(Column.class).name())) {
+                String key = f.getAnnotation(Column.class).name();
+                String value = "'"+f.get(entity)+"'";
+                if (!hasField) {
+                    hasField = true;
+                } else {
+                    builder.append(",");
+                }
+                builder.append(key).append("=").append(value);
+            }
+        }
+        return builder.toString();
+    }
 //    public static String insert(Object obj, String tableName) {
 //        System.out.println(obj.getClass().getField(""))
 //    }
     // generate insert statement
     public String insertQuery(Object instance) throws NotAnEntityException, IllegalAccessException {
-        String tableName = instance.getClass().getAnnotation(Table.class).name();
+        String tableName = getTableName(instance);
         if (tableName == null || !tables.contains(tableName)) {
             throw new NotAnEntityException();
         }
@@ -144,9 +174,26 @@ public class SQLHelper {
         return "DELETE FROM "+ tableName + " WHERE id=" + id + ";";
     }
 
+    public String updateQuery(Object instance) throws NotAnEntityException, IllegalAccessException {
+        String tableName = getTableName(instance);
+        if (tableName == null || !tables.contains(tableName)) {
+            throw new NotAnEntityException();
+        }
 
-    // generate delete statement
+        getFields(tableName);
+        var set = new HashSet<>(fields.get(tableName)) {{
+            remove("id");
+        }};
+        return "UPDATE "
+                + tableName
+                + " SET "+
+                keyValue(set,instance)
+                +" WHERE id=" +
+                "'"+idForObject(instance)+"'"+
+                ";";
+    }
 
-    // generate update statement
-
+    String getTableName(Object instance) {
+        return instance.getClass().getAnnotation(Table.class).name();
+    }
 }

@@ -20,12 +20,10 @@ import java.sql.Connection;
  */
 
 public class EntityManagerImpl implements EntityManager {
-    private Connection connection;
     private SQLHelper helper;
 
 
-    public EntityManagerImpl(Connection connection, SQLHelper helper) {
-        this.connection = connection;
+    public EntityManagerImpl(SQLHelper helper) {
         this.helper = helper;
     }
     @Override
@@ -37,7 +35,9 @@ public class EntityManagerImpl implements EntityManager {
 
     @Override
     public <T> T merge(T var1) throws Exception {
-        return null;
+        isEntity(var1);
+        Long id = SQLRunner.update(helper.updateQuery(var1));
+        return (T) find(var1.getClass(), id);
     }
 
     @Override

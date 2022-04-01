@@ -61,4 +61,11 @@ public class CarsController {
         em.remove(Cars.class,id);
         return toBeDeleted;
     }
+
+    @PutMapping("/{id}")
+    public Cars updateCarWithid(@PathVariable String id, @RequestBody Cars newCar) throws Exception {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        newCar.setId(Integer.parseInt(id));
+        return em.merge(newCar);
+    }
 }

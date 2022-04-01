@@ -36,8 +36,7 @@ public class EntityManagerFactory {
         if (entityManagerMap.containsKey(id)) {
             return entityManagerMap.get(id);
         } else {
-            EntityManager em = new EntityManagerImpl(
-                    DbWorker.getConnection(), helper);
+            EntityManager em = new EntityManagerImpl(helper);
             entityManagerMap.put(id, em);
             return em;
         }
