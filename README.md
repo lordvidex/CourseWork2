@@ -16,3 +16,4 @@ Course Work repository for Informatics, Year 2
 - **s2_lab3**: Built a package responsible for checking the database to make sure entities and database tables match with pure `Java reflections` and `SQL` no packages. Results are neatly shown in the CLI with emojis.
 - **s2_lab4**: Finally, our sensei let us use Spring😭
 - **project2**: Cryptography, BlockChain and clean REST services
+- **stock-market**: the central server, one of the many distributed systems built with my colleagues in the second semester. Full project can be found at https://github.com/itis-11013. #spring #distributed-systems #fintech
